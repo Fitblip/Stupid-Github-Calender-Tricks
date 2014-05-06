@@ -1,6 +1,7 @@
-Stupid-Github-Calender-Tricks
+Stupid Github Calender Tricks
 =============================
 
-A quick project to do something dumb on github's collaborative calendar thingie. 
+A quick project to generate a series of git commits with specific timestamps from an arbitrary pattern. Maybe a crontab. Something. 
 
-Generates a crontab that generates an arbitrary pattern. 
+Uses D3.js and cal-heatmap
+
