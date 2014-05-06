@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../static/css/cal-heatmap.css">
+  </head>
+  <body>
+  <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+  <script src="../static/js/cal-heatmap.js"></script>
+
+  <div style="
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  top: 20%;
+  " id="cal-heatmap"></div>
+  <script type="text/javascript">
+    var cal = new CalHeatMap();
+    cal.init({
+      data: "contributions_calendar_data.json",
+     // domain: "month",
+      domain: "week",
+      range: 52,
+      subDomain: "day",
+      cellPadding: 1,
+      tooltip: true,
+      domainLabelFormat: "",
+      onClick: function(date, nb) {
+        if (event.target.style.fill == ""){
+          event.target.style.fill = "black"
+        } else {
+          event.target.style.fill = ""
+        }
+
+      }
+
+    });
+  </script>
+
+
+  </body>
+</html>
