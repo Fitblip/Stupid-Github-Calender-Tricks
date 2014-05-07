@@ -15,25 +15,82 @@
   margin-right: auto;
   width: 935px;
   top: 20%;
-  " id="cal-heatmap"></div>
+  " id="container">
+    <div id="cal-heatmap"></div>
+
+    <div class="input-lg" style="width: 400px;margin-left: auto;margin-right: auto;">
+      <div class="form-group">
+        <form>
+          <input type="text" value="" placeholder="Github Username" class="usernameInput form-control">
+          <a href="#fakelink" class="btn btn-block btn-lg btn-primary">Do it!</a>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  {# Populate the datasource url dynamically #}
+  {% if dataSource %}
+    <script>dataURL = "{{dataSource}}";</script>
+  {% else %}
+    <script>dataURL = "";</script>
+  {% endif %}
+
+
   <script type="text/javascript">
+    $('.usernameInput').submit(function(e){
+      debugger;
+      e.preventDefault()
+    })
+
+    function snapshot() {
+      timestamps = {};
+      $('.graph-subdomain-group > g > rect').each(function (index, thing) {
+        // I hate both javascript AND myself for this.
+        classes = thing.attributes.class.value.trim().split(' ');
+        var classVar;
+        for (var i = 0; i < classes.length; i++) {
+          if (classes[i].length == 2) {
+            classVar = classes[i];
+          }
+        }
+        var value = 0;
+        if (classVar == "r0") {
+          value = 0;
+        } else if (classVar == "r1") {
+          value = 1;
+        } else if (classVar == "r2") {
+          value = 4;
+        } else if (classVar == "r3") {
+          value = 8;
+        } else if (classVar == "r4") {
+          value = 14;
+        } else {
+          value = 0;
+        }
+        timestamps[thing.__data__.t / 1000] = value;
+      });
+    }
+
     var cal = new CalHeatMap();
     var currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear()-1);
     cal.init({
-      data: "/data.json",
+      data: dataURL,
       weekStartOnMonday: false,
       legend: [3, 7, 10],
       cellSize: 15,
       displayLegend: false,
-      //considerMissingDataAsZero: true,
-	legendColors: {
-		min: "#d6e685",
-		max: "#1e6823",
-		empty: "#eee"
-		// Will use the CSS for the missing keys
-	},
-     // domain: "month",
+      legendColors: {
+        min: "#d6e685",
+        max: "#1e6823",
+        empty: "#eee"
+      },
       domain: "week",
       range: 52,
       subDomain: "day",
@@ -41,39 +98,7 @@
       tooltip: true,
       domainLabelFormat: "",
       start: currentDate,
-      dataType: "json",
-
-      onClick: function(date, nb) {
-         // debugger;
-        var bottomClass = 0;
-        var ele = event.currentTarget;
-        var classList = ele.classList
-        for (i=0;i<classList.length;i++){
-            var classref = classList.item(i);
-            if (classref[0] == "r" && classref.length == 2 ) {
-                bottomClass = parseInt(classref[1]);
-            }
-        }
-        // TODO: make this not retarded
-        if (bottomClass == 0){
-            classList.remove("r0");
-            classList.add("r1");
-        } else if (bottomClass == 1) {
-            classList.remove("r1");
-            classList.add("r2");
-        } else if (bottomClass == 2) {
-            classList.remove("r2");
-            classList.add("r3");
-        } else if (bottomClass == 3) {
-            classList.remove("r3");
-            classList.add("r4");
-        } else if (bottomClass == 4) {
-            classList.remove("r4");
-            classList.add("r0");
-        }
-
-      }
-
+      dataType: "json"
     });
   </script>
 
