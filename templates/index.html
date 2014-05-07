@@ -44,15 +44,39 @@
       dataType: "json",
 
       onClick: function(date, nb) {
-        if (event.target.style.fill == ""){
-          event.target.style.fill = "black"
-        } else {
-          event.target.style.fill = ""
+         // debugger;
+        var bottomClass = 0;
+        var ele = event.currentTarget;
+        var classList = ele.classList
+        for (i=0;i<classList.length;i++){
+            var classref = classList.item(i);
+            if (classref[0] == "r" && classref.length == 2 ) {
+                bottomClass = parseInt(classref[1]);
+            }
+        }
+        // TODO: make this not retarded
+        if (bottomClass == 0){
+            classList.remove("r0");
+            classList.add("r1");
+        } else if (bottomClass == 1) {
+            classList.remove("r1");
+            classList.add("r2");
+        } else if (bottomClass == 2) {
+            classList.remove("r2");
+            classList.add("r3");
+        } else if (bottomClass == 3) {
+            classList.remove("r3");
+            classList.add("r4");
+        } else if (bottomClass == 4) {
+            classList.remove("r4");
+            classList.add("r0");
         }
 
       }
 
     });
+      cal.setLegend();
+
   </script>
 
 
