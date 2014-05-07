@@ -22,6 +22,17 @@
     currentDate.setFullYear(currentDate.getFullYear()-1);
     cal.init({
       data: "/data.json",
+      weekStartOnMonday: false,
+      legend: [3, 7, 10],
+      cellSize: 15,
+      displayLegend: false,
+      //considerMissingDataAsZero: true,
+	legendColors: {
+		min: "#d6e685",
+		max: "#1e6823",
+		empty: "#eee"
+		// Will use the CSS for the missing keys
+	},
      // domain: "month",
       domain: "week",
       range: 52,
