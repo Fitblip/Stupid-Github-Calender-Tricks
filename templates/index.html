@@ -16,8 +16,10 @@
   " id="cal-heatmap"></div>
   <script type="text/javascript">
     var cal = new CalHeatMap();
+    var currentDate = new Date();
+    currentDate.setFullYear(currentDate.getFullYear()-1);
     cal.init({
-      data: "contributions_calendar_data.json",
+      data: "/data.json",
      // domain: "month",
       domain: "week",
       range: 52,
@@ -25,6 +27,9 @@
       cellPadding: 1,
       tooltip: true,
       domainLabelFormat: "",
+      start: currentDate,
+      dataType: "json",
+
       onClick: function(date, nb) {
         if (event.target.style.fill == ""){
           event.target.style.fill = "black"
