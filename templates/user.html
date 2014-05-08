@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../static/css/cal-heatmap.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+  </head>
+  <body>
+  <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="../static/js/cal-heatmap.js"></script>
+
+  <div style="
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 935px;
+  top: 20%;
+  " id="cal-heatmap"></div>
+
+
+
+
+
+  <script type="text/javascript">
+    var dataURL = "{{dataSource}}";
+    var cal = new CalHeatMap();
+    var currentDate = new Date();
+    currentDate.setFullYear(currentDate.getFullYear()-1);
+    cal.init({
+      data: dataURL,
+      weekStartOnMonday: false,
+      legend: [3, 7, 10],
+      cellSize: 15,
+      displayLegend: false,
+      //considerMissingDataAsZero: true,
+	legendColors: {
+		min: "#d6e685",
+		max: "#1e6823",
+		empty: "#eee"
+		// Will use the CSS for the missing keys
+	},
+     // domain: "month",
+      domain: "week",
+      range: 52,
+      subDomain: "day",
+      cellPadding: 1,
+      tooltip: true,
+      domainLabelFormat: "",
+      start: currentDate,
+      dataType: "json",
+
+      onClick: function(date, nb) {
+         // debugger;
+        var bottomClass = 0;
+        var ele = event.currentTarget;
+        var classList = ele.classList
+        for (i=0;i<classList.length;i++){
+            var classref = classList.item(i);
+            if (classref[0] == "r" && classref.length == 2 ) {
+                bottomClass = parseInt(classref[1]);
+            }
+        }
+        // TODO: make this not retarded
+        if (bottomClass == 0){
+            classList.remove("r0");
+            classList.add("r1");
+        } else if (bottomClass == 1) {
+            classList.remove("r1");
+            classList.add("r2");
+        } else if (bottomClass == 2) {
+            classList.remove("r2");
+            classList.add("r3");
+        } else if (bottomClass == 3) {
+            classList.remove("r3");
+            classList.add("r4");
+        } else if (bottomClass == 4) {
+            classList.remove("r4");
+            classList.add("r0");
+        }
+
+      }
+
+    });
+  </script>
+
+
+  </body>
+</html>
