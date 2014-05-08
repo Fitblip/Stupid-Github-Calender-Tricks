@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for
 app = Flask(__name__)
 import json
 import time
+import urllib
 
 @app.route('/')
 def hello_world():
@@ -17,6 +18,12 @@ def data():
 def userCalander(username):
     return render_template('index.html',dataSource=url_for('data',username=username))
 
+
+@app.route('/<username>/data.json')
+def data(username):
+    data = urllib.urlopen('https://github.com/users/%s/contributions_calendar_data' % username).read()
+
+    data = json.loads(data)
 
     timeobj = {}
 
