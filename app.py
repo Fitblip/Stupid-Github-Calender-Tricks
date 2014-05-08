@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 app = Flask(__name__)
 import json
 import time
@@ -12,6 +12,11 @@ def data():
     with open('contributions_calendar_data.json') as f:
         data = json.loads(f.read())
     # Covert the list of lists github gives us to a dict with timestamps
+
+@app.route('/<username>/calender')
+def userCalander(username):
+    return render_template('index.html',dataSource=url_for('data',username=username))
+
 
     timeobj = {}
 
