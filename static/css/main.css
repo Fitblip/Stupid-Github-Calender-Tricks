@@ -2,8 +2,6 @@
     fill: rgb(214, 230, 133);
 }
 
-
-
 .r2{
     fill: rgb(140, 198, 101);
 }
@@ -14,7 +12,6 @@
 
 .r4{
     fill: rgb(30, 104, 35);
-
 }
 
 rect{
@@ -28,4 +25,28 @@ rect{
 .usernameInput{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.usernameTitle{
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: -45px;
+}
+
+#cal-heatmap{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 935px;
+    top: 20%;
+}
+
+.container{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 935px;
+    top: 20%;
 }
