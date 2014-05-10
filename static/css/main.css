@@ -30,7 +30,6 @@ rect{
 .usernameTitle{
     text-align: center;
     padding-top: 10px;
-    margin-bottom: -45px;
 }
 
 #cal-heatmap{
@@ -39,7 +38,7 @@ rect{
     margin-left: auto;
     margin-right: auto;
     width: 935px;
-    top: 20%;
+    margin-top: 40px;
 }
 
 .container{
