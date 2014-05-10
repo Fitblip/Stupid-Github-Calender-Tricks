@@ -33,10 +33,11 @@
 
 
   <script type="text/javascript">
-    $('.usernameInput').submit(function(e){
-      debugger;
-      e.preventDefault()
-    })
+    $('body').submit(function(e){
+      e.preventDefault();
+      var username = $('input').val();
+      window.location = "/" + username + "/calender";
+    });
 
     function snapshot() {
       timestamps = {};
