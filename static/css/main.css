@@ -24,3 +24,8 @@ rect{
 .r0{
     fill: #eee;
 }
+
+.usernameInput{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
