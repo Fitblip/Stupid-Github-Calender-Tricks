@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect
 app = Flask(__name__)
 import json
 import time
@@ -7,6 +7,10 @@ import urllib
 @app.route('/')
 def index():
     return render_template('index.html',dataSource="/username.json")
+
+@app.errorhandler(404)
+def redirectMain(e):
+    return redirect('/')
 
 @app.route("/username.json")
 def usernameData():
