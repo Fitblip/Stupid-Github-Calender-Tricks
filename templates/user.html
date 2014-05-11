@@ -44,10 +44,15 @@
       dataType: "json",
 
       onClick: function(date, nb) {
-         // debugger;
+//        debugger;
         var bottomClass = 0;
         var ele = event.currentTarget;
         var classList = ele.classList
+        // If the element is
+        if (!$(ele).attr('fill') == "#eeeeee"){
+           return false;
+        }
+
         for (i=0;i<classList.length;i++){
             var classref = classList.item(i);
             if (classref[0] == "r" && classref.length == 2 ) {
